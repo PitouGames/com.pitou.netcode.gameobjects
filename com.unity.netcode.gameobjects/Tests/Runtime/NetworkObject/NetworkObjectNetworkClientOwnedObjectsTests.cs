@@ -34,7 +34,8 @@ namespace Unity.Netcode.RuntimeTests
             yield return WaitForMessageReceived<CreateObjectMessage>(m_ClientNetworkManagers.ToList());
 
             // The object is owned by server
-            Assert.False(m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).Any(x => x.NetworkObjectId == serverObject.NetworkObjectId));
+            Assert.AreEqual(1, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+            Assert.AreEqual(0, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
 
             // Change the ownership
             serverObject.ChangeOwnership(m_ClientNetworkManagers[0].LocalClientId);
@@ -42,9 +43,48 @@ namespace Unity.Netcode.RuntimeTests
             // Provide enough time for the client to receive and process the change in ownership message.
             yield return WaitForMessageReceived<ChangeOwnershipMessage>(m_ClientNetworkManagers.ToList());
 
-            // Ensure it's now added to the list
-            Assert.True(m_ClientNetworkManagers[0].SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).Any(x => x.NetworkObjectId == serverObject.NetworkObjectId));
-            Assert.True(m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).Any(x => x.NetworkObjectId == serverObject.NetworkObjectId));
+            // Ensure it's removed from the server owned objects list
+            Assert.AreEqual(0, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            // Ensure it's added to the lists
+            Assert.AreEqual(1, m_ClientNetworkManagers[0].SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+            Assert.AreEqual(1, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            // Change the ownership again
+            serverObject.ChangeOwnership(NetworkManager.ServerClientId);
+
+            // Provide enough time for the client to receive and process the change in ownership message.
+            yield return WaitForMessageReceived<ChangeOwnershipMessage>(m_ClientNetworkManagers.ToList());
+
+            // Ensure it's removed from the client list
+            Assert.AreEqual(0, m_ClientNetworkManagers[0].SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            // Ensure it's added to the server list
+            Assert.AreEqual(1, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            // Change the ownership again (to test RemoveOwnership later)
+            serverObject.ChangeOwnership(m_ClientNetworkManagers[0].LocalClientId);
+
+            // Provide enough time for the client to receive and process the change in ownership message.
+            yield return WaitForMessageReceived<ChangeOwnershipMessage>(m_ClientNetworkManagers.ToList());
+
+            // Ensure it's removed from the server owned objects list
+            Assert.AreEqual(0, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            // Ensure it's added to the lists
+            Assert.AreEqual(1, m_ClientNetworkManagers[0].SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+            Assert.AreEqual(1, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ClientNetworkManagers[0].LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            serverObject.RemoveOwnership();
+
+            // Provide enough time for the client to receive and process the change in ownership message.
+            yield return WaitForMessageReceived<ChangeOwnershipMessage>(m_ClientNetworkManagers.ToList());
+
+            // Ensure it's removed from the client list
+            Assert.AreEqual(0, m_ClientNetworkManagers[0].SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
+
+            // Ensure it's added to the server list
+            Assert.AreEqual(1, m_ServerNetworkManager.SpawnManager.GetClientOwnedObjects(m_ServerNetworkManager.LocalClientId).FindAll(x => x.NetworkObjectId == serverObject.NetworkObjectId).Count);
         }
 
         [UnityTest]
