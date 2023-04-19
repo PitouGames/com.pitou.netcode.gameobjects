@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 Additional documentation and release notes are available at [Multiplayer Documentation](https://docs-multiplayer.unity3d.com).
 
-## [1.2.0] - 2022-11-21
+## [1.2.0] - 2023-04-20 - Pitou
 
 ### Added
 
@@ -32,6 +32,7 @@ Additional documentation and release notes are available at [Multiplayer Documen
 - Fixed issue where in-scene placed `NetworkObjects` were not honoring the `AutoObjectParentSync` property. (#2281)
 - Fixed the issue where `NetworkManager.OnClientConnectedCallback` was being invoked before in-scene placed `NetworkObject`s had been spawned when starting `NetworkManager` as a host. (#2277)
 - Creating a `FastBufferReader` with `Allocator.None` will not result in extra memory being allocated for the buffer (since it's owned externally in that scenario). (#2265)
+- Removed anoying warnings when using NetworkVariable in offline mode. (#2279)
 
 ### Removed
 
