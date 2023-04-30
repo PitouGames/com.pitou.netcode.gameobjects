@@ -12,6 +12,7 @@ Additional documentation and release notes are available at [Multiplayer Documen
 
 - Removed anoying warnings when using `NetworkList` in offline mode. (#2279)
 - Removed anoying warnings when using `NetworkVariable` in offline mode. (#2279)
+- Fixed usage of `NetworkList` throwing exception when used without a NetworkManager in scene. (#2539)
 
 ## [1.5.2] - 2023-07-24
 

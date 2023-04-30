@@ -371,7 +371,7 @@ namespace Unity.Netcode
         public void Add(T item)
         {
             // check write permissions
-            if (!CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
+            if (m_NetworkBehaviour && !CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
             {
                 throw new InvalidOperationException("Client is not allowed to write to this NetworkList");
             }
@@ -392,7 +392,7 @@ namespace Unity.Netcode
         public void Clear()
         {
             // check write permissions
-            if (!CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
+            if (m_NetworkBehaviour && !CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
             {
                 throw new InvalidOperationException("Client is not allowed to write to this NetworkList");
             }
@@ -418,7 +418,7 @@ namespace Unity.Netcode
         public bool Remove(T item)
         {
             // check write permissions
-            if (!CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
+            if (m_NetworkBehaviour && !CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
             {
                 throw new InvalidOperationException("Client is not allowed to write to this NetworkList");
             }
@@ -453,7 +453,7 @@ namespace Unity.Netcode
         public void Insert(int index, T item)
         {
             // check write permissions
-            if (!CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
+            if (m_NetworkBehaviour && !CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
             {
                 throw new InvalidOperationException("Client is not allowed to write to this NetworkList");
             }
@@ -482,7 +482,7 @@ namespace Unity.Netcode
         public void RemoveAt(int index)
         {
             // check write permissions
-            if (!CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
+            if (m_NetworkBehaviour && !CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
             {
                 throw new InvalidOperationException("Client is not allowed to write to this NetworkList");
             }
@@ -507,7 +507,7 @@ namespace Unity.Netcode
             set
             {
                 // check write permissions
-                if (!CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
+                if (m_NetworkBehaviour && !CanClientWrite(m_NetworkBehaviour.NetworkManager.LocalClientId))
                 {
                     throw new InvalidOperationException("Client is not allowed to write to this NetworkList");
                 }
