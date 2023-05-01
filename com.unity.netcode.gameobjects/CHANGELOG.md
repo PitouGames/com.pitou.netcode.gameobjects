@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 Additional documentation and release notes are available at [Multiplayer Documentation](https://docs-multiplayer.unity3d.com).
 
+## Unreleased
+
+### Fixed
+
+- Fixed missing value on `NetworkListEvent` for `EventType.RemoveAt` events server side. (#2542)
+
 ## [1.2.0.1] - 2023-04-20 - Pitou
 
 - Fixed usage of `NetworkList` throwing exception when used without a NetworkManager in scene. (#2539)
