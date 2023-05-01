@@ -430,12 +430,12 @@ namespace Unity.Netcode
             return a == b;
         }
 
-        internal static void Write(FastBufferWriter writer, ref T value)
+        public static void Write(FastBufferWriter writer, ref T value)
         {
             Serializer.Write(writer, ref value);
         }
 
-        internal static void Read(FastBufferReader reader, ref T value)
+        public static void Read(FastBufferReader reader, ref T value)
         {
             Serializer.Read(reader, ref value);
         }

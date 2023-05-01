@@ -56,7 +56,7 @@ namespace Unity.Netcode
 
         internal NetworkBehaviourUpdater BehaviourUpdater { get; set; }
 
-        internal void MarkNetworkObjectDirty(NetworkObject networkObject)
+        public void MarkNetworkObjectDirty(NetworkObject networkObject)
         {
             BehaviourUpdater.AddForUpdate(networkObject);
         }

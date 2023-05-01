@@ -16,7 +16,7 @@ namespace Unity.Netcode
         /// <summary>
         /// Maintains a link to the associated NetworkBehaviour
         /// </summary>
-        private protected NetworkBehaviour m_NetworkBehaviour;
+        protected NetworkBehaviour m_NetworkBehaviour;
 
         /// <summary>
         /// Initializes the NetworkVariable
