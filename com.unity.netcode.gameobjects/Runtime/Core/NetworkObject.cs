@@ -1049,7 +1049,7 @@ namespace Unity.Netcode
             return 0;
         }
 
-        internal NetworkBehaviour GetNetworkBehaviourAtOrderIndex(ushort index)
+        public NetworkBehaviour GetNetworkBehaviourAtOrderIndex(ushort index)
         {
             if (index >= ChildNetworkBehaviours.Count)
             {
