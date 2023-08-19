@@ -1161,7 +1161,7 @@ namespace Unity.Netcode.Editor.CodeGen
                     //var type = field.FieldType;
                     if (type.IsGenericInstance)
                     {
-                        if (type.Resolve().Name == typeof(NetworkVariable<>).Name || type.Resolve().Name == typeof(NetworkList<>).Name)
+                        if (type.Resolve().Name == typeof(NetworkVariable<>).Name || type.Resolve().Name == typeof(NetworkList<>).Name || type.Resolve().Name == typeof(ManagedNetworkList<>).Name || type.Resolve().Name == typeof(ManagedNetworkArray<>).Name)
                         {
                             var genericInstanceType = (GenericInstanceType)type;
                             var wrappedType = genericInstanceType.GenericArguments[0];

@@ -8,6 +8,11 @@ Additional documentation and release notes are available at [Multiplayer Documen
 
 ## [Unreleased] - Pitou
 
+### Added
+
+- Added `ManagedNetworkList` that allow to use managed objects in a networked list.
+- Added `ManagedNetworkArray` that allow to use managed objects in a networked array.
+
 ### Fixed
 
 - Removed anoying warnings when using `NetworkList` in offline mode. (#2279)
