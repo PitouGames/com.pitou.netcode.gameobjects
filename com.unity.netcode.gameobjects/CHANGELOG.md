@@ -8,6 +8,10 @@ Additional documentation and release notes are available at [Multiplayer Documen
 
 ## [Unreleased]
 
+### Added
+
+- Added serializer for `Pose` (#2675)
+
 ### Fixed
 
 - Removed anoying warnings when using NetworkVariable in offline mode. (#2279)
