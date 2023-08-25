@@ -8,6 +8,10 @@ Additional documentation and release notes are available at [Multiplayer Documen
 
 ## [Unreleased]
 
+### Added
+
+- Added serializer for `Pose` (#2675)
+
 ### Fixed
 
 - Fixed a bug where having a class with Rpcs that inherits from a class without Rpcs that inherits from NetworkVariable would cause a compile error. (#2751)
