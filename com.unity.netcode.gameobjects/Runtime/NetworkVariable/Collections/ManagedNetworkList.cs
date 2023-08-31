@@ -220,9 +220,7 @@ namespace Unity.Netcode
                     break;
                 case NetworkListEvent<T>.EventType.RemoveAt: {
                         reader.ReadValueSafe(out int index);
-                        Debug.Log(index);
                         T value = m_List[index];
-                        Debug.Log(value);
                         m_List.RemoveAt(index);
 
                         OnListChanged?.Invoke(new NetworkListEvent<T> {
