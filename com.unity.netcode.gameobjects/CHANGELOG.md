@@ -11,6 +11,7 @@ Additional documentation and release notes are available at [Multiplayer Documen
 ### Fixed
 
 - Fixed a bug where having a class with Rpcs that inherits from a class without Rpcs that inherits from NetworkVariable would cause a compile error. (#2751)
+- Removed anoying warnings when using NetworkVariable in offline mode. (#2279)
 
 ## [1.7.0] - 2023-10-11
 
